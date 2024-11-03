@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Kecamatan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border: 2px solid #007BFF; /* Border tebal dengan warna kontras */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Lebar form */
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF; /* Warna judul */
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF; /* Warna tombol */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Warna tombol saat hover */
+        }
+        #informasi {
+            color: red; /* Warna pesan informasi */
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Form Input</h2>
+    <form action="/pgweb_acara8_kedua/input.php" onsubmit="return validateForm()" method="post"> 
+        <label for="kecamatan">Kecamatan:</label>
+        <input type="text" id="kecamatan" name="kecamatan" required>
+
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" required>
+
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" required>
+
+        <label for="luas">Luas:</label>
+        <input type="text" id="luas" name="luas" required>
+
+        <label for="jumlah_penduduk">Jumlah Penduduk:</label>
+        <input type="text" id="jumlah_penduduk" name="jumlah_penduduk" required>
+
+        <input type="submit" value="Submit">
+    </form> 
+    <p id="informasi"></p>
+</div>
+
+<script>
+function validateForm() {
+    let kecamatan = document.getElementById("kecamatan").value;
+    let longitude = document.getElementById("longitude").value;
+    let latitude = document.getElementById("latitude").value;
+    let luas = document.getElementById("luas").value;
+    let jumlahPenduduk = document.getElementById("jumlah_penduduk").value;
+    let text = "";
+
+    // Validasi untuk memastikan semua field diisi
+    if (!kecamatan || !longitude || !latitude || !luas || !jumlahPenduduk) {
+        text = "Semua field harus diisi.";
+        document.getElementById("informasi").innerHTML = text;
+        return false; // Hentikan pengiriman form
+    }
+    
+    // Validasi untuk luas
+    if (isNaN(luas) || luas < 1) {
+        text = "Data luas harus angka dan tidak boleh bernilai negatif";
+        document.getElementById("informasi").innerHTML = text;
+        return false; // Hentikan pengiriman form
+    }
+
+    document.getElementById("informasi").innerHTML = ""; // Bersihkan pesan jika validasi berhasil
+    return true; // Izinkan pengiriman form
+}
+</script>
+
+</body>
+</html>
